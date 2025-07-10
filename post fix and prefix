@@ -1,1 +1,67 @@
+#include <stdio.h>
+#include <ctype.h>
+#define SIZE 100
 
+char stack[SIZE];
+int top = -1; // Initialize top
+
+void push(char ch) {
+    stack[++top] = ch;
+}
+
+char pop() {
+    return stack[top--];
+}
+
+char peek() {
+    return stack[top];
+}
+
+int precedence(char ch) {
+    switch(ch) {
+        case '+':
+        case '-': return 1;
+        case '*':
+        case '/': return 2;
+        case '^' :return 3;
+    }
+    return -1;
+}
+
+void infixToPostfix(char* infix) {
+    char postfix[SIZE];
+    int i = 0, j = 0; // Initialize j
+    char ch;
+
+    while ((ch = infix[i++]) != '\0') { // Assignment inside while condition
+        if (isalnum(ch)) {
+            postfix[j++] = ch;
+        } else if (ch == '(') {
+            push(ch);
+        } else if (ch == ')') {
+            while (top != -1 && peek() != '(') {
+                postfix[j++] = pop();
+            }
+            if (top != -1 && peek() == '(') { // Check before popping
+                pop(); // Pop '('
+            }
+        } else {
+            while (top != -1 && precedence(ch) <= precedence(peek())) { // Changed to <= for left-associativity except for ^
+                postfix[j++] = pop();
+            }
+            push(ch);
+        }
+    }
+
+    while (top != -1) {
+        postfix[j++] = pop();
+    }
+    postfix[j] = '\0';
+    printf("Postfix Expression: %s\n", postfix);
+}
+
+int main() {
+    char infix[] = "a+b*(c^d-e)^(f+g*h)-i";
+    infixToPostfix(infix);
+    return 0;
+}
