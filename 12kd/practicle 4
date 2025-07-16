@@ -1,53 +1,82 @@
-// Online C++ compiler to run C++ program online
 #include <iostream>
 
 using namespace std;
-int stack[5],n=5,top=-1;
-void push(int x)
-{
-    if (top==n-1)
-    cout << "stack is full";
-    else{
-        top++;
-        stack[top]=x;
+
+int stack[5]; 
+int n = 5;    
+int top = -1; 
+
+void push(int x) {
+    if (top == n - 1) { 
+        cout << "Stack is full" << endl; 
+    } else {
+        top++;           
+        stack[top] = x;  
     }
 }
 
-void display(){
-    if(top>=0){
-        cout<<"Stack element are"<<endl;
-        for(int i=top;i>0;i--)
-            cout<<stack[i]<<endl;
-    }
-    else
-    {
-        cout<<"Stack is empty"<<endl;
-    }
-}
-}
-void pop()
-{
-    if (top ==-1)
-    cout<<"Stack is empty"<<endl;
-    else{
-    cout<<"The popped element is:"<<stack[top]<<endl; 
-    top--;
+void display() {
+    if (top >= 0) { 
+        cout << "Stack elements are:" << endl;
+        for (int i = top; i >= 0; i--) {
+            cout << stack[i] << endl;
+        }
+    } else {
+        cout << "Stack is empty" << endl;
     }
 }
 
-int peek()
-{
+void pop() {
+    if (top == -1) { 
+        cout << "Stack is empty" << endl;
+    } else {
+        cout << "The popped element is: " << stack[top] << endl; 
+        top--;
+    }
+}
+
+int peek() {
+    if (top == -1) {
+        cout << "Stack is empty, cannot peek." << endl;
+        return -1; 
+    }
     return stack[top];
 }
+
 void search(int element) {
-    for (int i top; i >= 0; i--) {
+    bool found = false; 
+    for (int i = top; i >= 0; i--) { 
         if (stack[i] == element) {
-            cout << "Element" << element << " found at position" << (topi 1) << " from top." << endl;
-            return;
-            }
+            cout << "Element " << element << " found at position " << (top - i + 1) << " from top." << endl;
+            found = true;
+            break; 
         }
-        cout << "Element" << element <<< not found in stack." << endl;
     }
+    if (!found) {
+        cout << "Element " << element << " not found in stack." << endl; 
+    }
+}
+
+
 int main() {
-    {
     push(1);
+    push(2);
+    push(3);
+    push(4);
+    push(5);
+    push(6);
+
+    display();
+
+    pop();
+
+    display();
+
+    int y = peek();
+    cout << "\nTop element of the stack is: " << y << endl;
+
+    search(3);
+    search(10); 
+
+    return 0; 
+}
