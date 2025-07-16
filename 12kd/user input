@@ -1,0 +1,22 @@
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int i;
+    string a,b,c;
+    for(i=1; i<6; i++)
+        {
+            cout << "Hello word "<<endl;
+        }
+        
+    cout <<"Enter Your name:: ";
+    cin>>a;
+    cout <<"Enter Your name:: ";
+    cin>>b;
+    cout <<"Enter Your name:: ";
+    cin>>c;
+    
+    
+    return 0;
+}
