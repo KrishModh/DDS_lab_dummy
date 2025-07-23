@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int a, b, c, g;
+
+int gcd(int x, int y) {
+    if (y == 0)
+        return x;
+    return gcd(y, x % y);
+}
+
+int main() {
+    int temp;
+
+    printf("Give 3 values \n");
+    scanf("%d %d %d", &a, &b, &c);
+
+    if (b < a) {
+        temp = a;
+        a = b;
+        b = temp;
+    }
+    if (c < a) {
+        temp = a;
+        a = c;
+        c = temp;
+    }
+
+    printf("Working with %d \n", a);
+
+    g = gcd(a, b);
+    g = gcd(g, c);
+
+    printf("The GCD of numbers %d, %d, %d is %d\n", a, b, c, g);
+
+    return 0;
+}
