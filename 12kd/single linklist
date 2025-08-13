@@ -1,0 +1,28 @@
+#include <iostream>
+
+struct Node {
+	int val;
+	struct node *next;
+};
+
+class LL {
+    public:
+	struct Node *start;
+	struct Node *getnode()
+	{
+		struct Node *p;
+		p = new(struct Node);
+		std::cout << "Give value for new node" << std::endl;
+        p -> next = NULL;
+		std::cin >> p -> val;
+		return p;
+	}
+};
+
+int main()
+{
+	LL b;
+	b.start = b.getnode();
+	b.start = b.getnode();
+	return 0;
+}
