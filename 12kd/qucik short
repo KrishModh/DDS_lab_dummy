@@ -1,0 +1,46 @@
+#include <iostream>
+
+const int n = 5;
+int A[n] = {64, 34, 25, 12, 22};
+
+void swap(int x, int y) {
+    int temp = A[x];
+    A[x] = A[y];
+    A[y] = temp;
+}
+
+int partition(int low, int high) {
+    int pivot = A[high]; // choosing the last element as the pivot
+    int i = low - 1; // index of smaller element
+
+    for (int j = low; j < high; j++) {
+        if (A[j] < pivot) { // If current element is smaller than the pivot
+            i++;
+            swap(i, j);
+        }
+    }
+    swap(i + 1, high); // Move the pivot to its correct position
+    return (i + 1);
+}
+
+void quickSort(int low, int high) {
+    if (low < high) {
+        int pi = partition(low, high); // Partition the array
+        quickSort(low, pi - 1); // Recursively sort the left subarray
+        quickSort(pi + 1, high); // Recursively sort the right subarray
+    }
+}
+
+void show() {
+    for (int k = 0; k < n; k++) {
+        std::cout << A[k] << "\t";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    show();
+    quickSort(0, n - 1); // Call Quick Sort on the entire array
+    show();
+    return 0;
+}
